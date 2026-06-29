@@ -1,5 +1,6 @@
 import { createInitialState, applyEraToState } from "./core/state.js";
 import { applyOption, chooseDecree, continueToNextMonth, selectAmbition, startNextEvent } from "./core/engine.js";
+import { chooseQuickOption, createQuickDraft, setQuickParam, startQuickRun } from "./core/quickEngine.js";
 import { clearAchievements, clearCodex, clearHistory, clearSave, loadGame, saveGame } from "./core/storage.js";
 import { ERA_LIST } from "./data/eras.js";
 import { render } from "./ui/render.js";
@@ -14,6 +15,27 @@ const actions = {
   newGame() {
     state = createInitialState();
     state.screen = "era";
+    renderApp();
+  },
+  quickParam(value) {
+    const [groupKey, optionId] = String(value || "").split(":");
+    state.quick = state.quick || createQuickDraft();
+    setQuickParam(state, groupKey, optionId);
+    state.screen = "quickSetup";
+    renderApp();
+  },
+  startQuick() {
+    state.quick = state.quick || createQuickDraft();
+    startQuickRun(state);
+    renderApp();
+  },
+  chooseQuickOption(optionIndex) {
+    chooseQuickOption(state, optionIndex);
+    renderApp();
+  },
+  restartQuick() {
+    state.quick = createQuickDraft();
+    state.screen = "quickSetup";
     renderApp();
   },
   loadGame() {

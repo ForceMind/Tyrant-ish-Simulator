@@ -11,6 +11,70 @@
     padding: 8px;
   }
 
+  .website-screen {
+    width: 100%;
+  }
+
+  .site-nav {
+    margin-bottom: 10px;
+  }
+
+  .site-nav span {
+    display: none;
+  }
+
+  .site-hero {
+    min-height: 0;
+    gap: 12px;
+  }
+
+  .site-copy h1 {
+    font-size: 2.25rem;
+  }
+
+  .site-copy .subtitle {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .site-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .site-visual {
+    min-height: 230px;
+  }
+
+  .palace-roof {
+    top: 28px;
+    height: 58px;
+  }
+
+  .throne-card {
+    top: 98px;
+    left: 8%;
+    right: 8%;
+    padding: 10px;
+    gap: 6px;
+    font-size: 0.8rem;
+  }
+
+  .throne-card span {
+    padding: 7px;
+  }
+
+  .mini-edict {
+    right: 8%;
+    bottom: 16px;
+    width: 86px;
+    min-height: 84px;
+    padding: 10px 8px;
+    font-size: 0.95rem;
+  }
+
   .game-screen {
     width: 100%;
     height: 100dvh;
@@ -33,7 +97,12 @@
   .archive-layout,
   .archive-layout-rich,
   .ambition-grid,
-  .decree-grid {
+  .decree-grid,
+  .quick-setup-grid,
+  .quick-param-options,
+  .quick-play-layout,
+  .site-hero,
+  .site-feature-grid {
     grid-template-columns: 1fr;
   }
 
@@ -213,6 +282,38 @@
 
   .response-panel > .btn {
     min-height: 42px;
+  }
+
+  .quick-screen h1 {
+    font-size: 2rem;
+  }
+
+  .quick-param-card {
+    min-height: 76px;
+  }
+
+  .quick-start-panel {
+    display: grid;
+  }
+
+  .quick-play-screen {
+    min-height: 100dvh;
+  }
+
+  .quick-play-layout {
+    grid-template-areas:
+      "event"
+      "choices"
+      "log";
+  }
+
+  .quick-log-panel {
+    max-height: 220px;
+    overflow-y: auto;
+  }
+
+  .quick-final-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .archive-screen .panel-title-row {

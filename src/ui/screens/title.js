@@ -12,9 +12,11 @@ export function renderTitle(state) {
         <p class="subtitle">${GAME_CONFIG.subtitle}</p>
         <div class="title-actions">
           ${button("newGame", t("buttons.start"), "", "primary")}
+          ${button("go", "快速体验", "quickSetup")}
           ${button("loadGame", t("buttons.load"))}
           ${button("go", t("buttons.archives"), "archives")}
           ${button("go", t("buttons.settings"), "settings")}
+          ${button("go", "返回官网", "website", "ghost")}
         </div>
         ${toast}
       </section>

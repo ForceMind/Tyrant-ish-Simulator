@@ -31,7 +31,7 @@ export function clamp(value, min = 0, max = 100) {
 
 export function createInitialState() {
   return {
-    screen: "title",
+    screen: "website",
     era: null,
     accessionText: "",
     year: 1,
@@ -53,6 +53,7 @@ export function createInitialState() {
     achievementsUnlockedNow: [],
     archivePages: {},
     archiveTab: "records",
+    quick: null,
     seenEventIds: [],
     bombCooldown: {},
     counters: {

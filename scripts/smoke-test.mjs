@@ -3,6 +3,7 @@ import { ERA_LIST } from "../src/data/eras.js";
 import { AMBITIONS } from "../src/data/ambitions.js";
 import { DECREE_POOL } from "../src/data/decrees.js";
 import { createInitialState, applyEraToState } from "../src/core/state.js";
+import { chooseQuickOption, createQuickDraft, startQuickRun } from "../src/core/quickEngine.js";
 import {
   applyOption,
   finishGame,
@@ -120,11 +121,20 @@ function scoreOption(effects) {
 function checkRendering() {
   const root = { innerHTML: "" };
   const state = createInitialState();
-  ["title", "era", "ambition", "archives", "settings"].forEach((screen) => {
+  ["website", "title", "era", "ambition", "archives", "settings", "quickSetup"].forEach((screen) => {
     state.screen = screen;
     render(root, state);
     assert(root.innerHTML.includes("<main"), `页面未渲染：${screen}`);
   });
+  state.quick = createQuickDraft();
+  startQuickRun(state);
+  render(root, state);
+  assert(root.innerHTML.includes("关键节点"), "快速版缺少关键节点");
+  for (let index = 0; index < 8 && state.screen !== "quickEnding"; index += 1) {
+    chooseQuickOption(state, 0);
+  }
+  render(root, state);
+  assert(root.innerHTML.includes("快速版实录"), "快速版未生成结局");
 
   applyEraToState(state, ERA_LIST[0]);
   selectAmbition(state, AMBITIONS[0].id);

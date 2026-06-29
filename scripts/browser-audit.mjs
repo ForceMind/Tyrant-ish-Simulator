@@ -282,6 +282,10 @@ async function auditViewport(cdp, baseUrl, viewport, name) {
   await cdp.send("Page.navigate", { url: `${baseUrl}?audit=${encodeURIComponent(name)}-${Date.now()}` });
   await wait(250);
 
+  await checkPage(cdp, "website");
+  await capture(cdp, `${name}-website`);
+  await auditQuickMode(cdp, `${name}-quick`);
+  await click(cdp, '[data-action="go"][data-value="title"]');
   await checkPage(cdp, "title");
   await capture(cdp, `${name}-title`);
   await click(cdp, '[data-action="newGame"]');
@@ -320,6 +324,7 @@ async function longPlayAudit(cdp, baseUrl) {
   });
   await cdp.send("Page.navigate", { url: `${baseUrl}?audit=long-${Date.now()}` });
   await wait(250);
+  await click(cdp, '[data-action="go"][data-value="title"]');
   await click(cdp, '[data-action="newGame"]');
   await click(cdp, '[data-action="selectEra"][data-value="baofu"]');
   await click(cdp, '[data-action="beginReign"]');
@@ -396,12 +401,39 @@ async function longPlayAudit(cdp, baseUrl) {
   };
 }
 
+async function auditQuickMode(cdp, name) {
+  await click(cdp, '[data-action="go"][data-value="quickSetup"]');
+  await checkPage(cdp, "quick-setup");
+  await capture(cdp, `${name}-setup`);
+  await click(cdp, '[data-action="quickParam"][data-value="temper:rich"]');
+  await click(cdp, '[data-action="quickParam"][data-value="policy:pleasure"]');
+  await click(cdp, '[data-action="quickParam"][data-value="opening:border"]');
+  await click(cdp, '[data-action="quickParam"][data-value="tempo:short"]');
+  await click(cdp, '[data-action="startQuick"]');
+  await checkPage(cdp, "quick-play");
+  await capture(cdp, `${name}-play`);
+  for (let i = 0; i < 8; i += 1) {
+    const screen = await getScreenName(cdp);
+    if (screen === "quickEnding") break;
+    assert(screen === "quickPlay", `Quick mode stopped on unexpected screen: ${screen}`);
+    await clickFirst(cdp, '[data-action="chooseQuickOption"]');
+  }
+  await checkPage(cdp, "quick-ending");
+  await capture(cdp, `${name}-ending`);
+  await click(cdp, '[data-action="go"][data-value="website"]');
+  await checkPage(cdp, "website-after-quick");
+}
+
 async function getScreenName(cdp) {
   return evaluate(cdp, `(() => {
     const main = document.querySelector('main');
     if (!main) return 'missing';
     const classes = [...main.classList];
+    if (classes.includes('website-screen')) return 'website';
     if (classes.includes('title-screen')) return 'title';
+    if (classes.includes('quick-screen')) return 'quickSetup';
+    if (classes.includes('quick-play-screen')) return 'quickPlay';
+    if (classes.includes('quick-ending-screen')) return 'quickEnding';
     if (classes.includes('era-screen')) return 'era';
     if (classes.includes('ambition-screen')) return 'ambition';
     if (classes.includes('game-screen')) return 'main';
@@ -471,6 +503,7 @@ async function forceLoadedSaveEnding(cdp, baseUrl) {
   })()`);
   await cdp.send("Page.navigate", { url: baseUrl });
   await wait(250);
+  await click(cdp, '[data-action="go"][data-value="title"]');
   await click(cdp, '[data-action="loadGame"]');
   await checkPage(cdp, "loaded-for-ending");
   await clickFirst(cdp, '[data-action="chooseOption"]');

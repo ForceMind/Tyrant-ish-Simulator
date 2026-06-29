@@ -699,8 +699,18 @@
 }
 
 @media (min-width: 860px) {
+  .game-screen {
+    width: min(100%, 1240px);
+    grid-template-rows: auto auto auto;
+    align-content: start;
+  }
+
+  .game-screen > .stat-grid {
+    align-self: start;
+  }
+
   .game-body {
-    grid-template-columns: minmax(0, 1fr) 390px;
+    grid-template-columns: minmax(0, 1fr) 420px;
     align-items: start;
   }
 
@@ -710,12 +720,25 @@
 
   .mobile-card-carousel {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.58fr);
+    grid-template-columns: minmax(430px, 1fr) minmax(320px, 0.68fr);
     grid-template-rows: auto auto;
     align-items: stretch;
     max-height: none;
     overflow: visible;
     scroll-snap-type: none;
+  }
+
+  .game-screen .event-card {
+    min-height: 330px;
+  }
+
+  .game-screen .long-term-panel,
+  .game-screen .risk-panel {
+    min-height: 0;
+  }
+
+  .game-screen .imperial-choice-panel {
+    min-height: 330px;
   }
 
   .carousel-slide {

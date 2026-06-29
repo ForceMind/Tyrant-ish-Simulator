@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Shit皇帝">
+  <rect width="128" height="128" rx="26" fill="#8f1d1d"/>
+  <path d="M25 43 42 25l14 24 8-28 8 28 14-24 17 18-9 26H34L25 43Z" fill="#f4d27d"/>
+  <path d="M34 72h60v12c0 18-12 30-30 30S34 102 34 84V72Z" fill="#f8e6ad"/>
+  <path d="M45 88h38" stroke="#8f1d1d" stroke-width="8" stroke-linecap="round"/>
+  <path d="M64 62v42" stroke="#8f1d1d" stroke-width="8" stroke-linecap="round"/>
+  <path d="M48 104h32" stroke="#8f1d1d" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="64" cy="48" r="7" fill="#fff3c6"/>
+</svg>

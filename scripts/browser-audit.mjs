@@ -279,6 +279,9 @@ async function auditViewport(cdp, baseUrl, viewport, name) {
     deviceScaleFactor: viewport.scale,
     mobile: viewport.mobile
   });
+  await cdp.send("Page.navigate", { url: `${baseUrl}?audit=reset-${encodeURIComponent(name)}-${Date.now()}` });
+  await wait(250);
+  await evaluate(cdp, `localStorage.clear(); true`);
   await cdp.send("Page.navigate", { url: `${baseUrl}?audit=${encodeURIComponent(name)}-${Date.now()}` });
   await wait(600);
 
@@ -300,6 +303,9 @@ async function auditViewport(cdp, baseUrl, viewport, name) {
   await checkPage(cdp, "ambition");
   await clickFirst(cdp, '[data-action="selectAmbition"]');
   await checkPage(cdp, "main");
+  await cdp.send("Page.navigate", { url: `${baseUrl}?audit=${encodeURIComponent(name)}-saved-${Date.now()}` });
+  await wait(600);
+  await checkPage(cdp, "main-after-refresh");
   await capture(cdp, `${name}-main`);
   await clickFirst(cdp, '[data-action="chooseOption"]');
   await checkPage(cdp, "response");
@@ -326,6 +332,9 @@ async function longPlayAudit(cdp, baseUrl) {
     deviceScaleFactor: 2,
     mobile: true
   });
+  await cdp.send("Page.navigate", { url: `${baseUrl}?audit=long-reset-${Date.now()}` });
+  await wait(250);
+  await evaluate(cdp, `localStorage.clear(); true`);
   await cdp.send("Page.navigate", { url: `${baseUrl}?audit=long-${Date.now()}` });
   await wait(250);
   await click(cdp, '[data-action="go"][data-value="title"]');
@@ -513,8 +522,6 @@ async function forceLoadedSaveEnding(cdp, baseUrl) {
   })()`);
   await cdp.send("Page.navigate", { url: baseUrl });
   await wait(250);
-  await click(cdp, '[data-action="go"][data-value="title"]');
-  await click(cdp, '[data-action="loadGame"]');
   await checkPage(cdp, "loaded-for-ending");
   await clickFirst(cdp, '[data-action="chooseOption"]');
   await wait(120);

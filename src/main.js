@@ -6,7 +6,7 @@ import { ERA_LIST } from "./data/eras.js";
 import { QUICK_PARAM_GROUPS } from "./data/quickMode.js";
 import { render } from "./ui/render.js";
 
-let state = createInitialState();
+let state = loadGame() || createInitialState();
 
 const actions = {
   go(screen) {

@@ -57,6 +57,7 @@ const cssName = `styles.${hash(css)}.css`;
 
 fs.writeFileSync(path.join(ASSETS, jsName), obfuscated);
 fs.writeFileSync(path.join(ASSETS, cssName), css);
+fs.copyFileSync(path.join(ROOT, "assets", "favicon.svg"), path.join(ASSETS, "favicon.svg"));
 fs.writeFileSync(path.join(DIST, "index.html"), renderHtml(cssName, jsName));
 fs.writeFileSync(path.join(DIST, "_headers"), [
   "/*",
@@ -93,8 +94,9 @@ function renderHtml(cssName, jsName) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#8f1d1d">
-    <meta name="description" content="《Shit皇帝》是一款中文单机 H5 休闲策略 Roguelike 游戏。">
+    <meta name="description" content="《Shit皇帝》是一款中文休闲策略 Roguelike 游戏。">
     <title>Shit皇帝 | My Bad, Your Empire</title>
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="./assets/${cssName}">
   </head>
   <body>

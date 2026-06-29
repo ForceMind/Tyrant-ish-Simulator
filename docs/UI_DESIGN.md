@@ -4,18 +4,20 @@
 
 后续新增页面或大改页面，先走这个流程：
 
-1. 先出 UI 设计图和交互说明。
+1. 先出生图位图效果图和交互说明。
 2. 确认信息层级、按钮入口、PC/移动端布局。
 3. 再进入代码实现。
-4. 实现后用浏览器截图和设计稿对照验收。
+4. 实现后用浏览器截图和 PNG 效果稿对照验收。
 
 ## 当前设计稿
 
-| 页面 | PC 设计图 | 移动端设计图 |
+| 页面 | PC 效果图 | 移动端效果图 |
 | --- | --- | --- |
-| 官方网站首页 | [website-desktop.svg](ui-design/website-desktop.svg) | [website-mobile.svg](ui-design/website-mobile.svg) |
-| 快速版参数页 | [quick-setup-desktop.svg](ui-design/quick-setup-desktop.svg) | 后续按同一信息层级压成单列 |
-| 快速版推演页 | PC 采用事件/选择/年表三栏 | [quick-play-mobile.svg](ui-design/quick-play-mobile.svg) |
+| 官方网站首页 | [website-desktop-generated.png](ui-design/website-desktop-generated.png) | [website-mobile-generated.png](ui-design/website-mobile-generated.png) |
+| 快速版参数页 | [quick-setup-desktop-generated.png](ui-design/quick-setup-desktop-generated.png) | 后续按同一信息层级压成单列生图 |
+| 快速版推演页 | PC 采用事件/选择/年表三栏，后续补生图 | [quick-play-mobile-generated.png](ui-design/quick-play-mobile-generated.png) |
+
+这些是生图位图效果稿，不是 SVG 线框。后续正式实现前，以 PNG 效果图确认视觉方向；必要时再补低保真结构图，但低保真图不能替代效果图。
 
 ## 官网首页信息层级
 
@@ -47,4 +49,3 @@
 - 官网是否需要更强的品牌视觉图，还是保持轻量 H5 小游戏风格。
 - 快速版是否需要写入史官档案，目前设计为不写入，避免污染完整模式图鉴。
 - 快速版关键选择数量当前由推演速度控制，后续可改成玩家自选。
-

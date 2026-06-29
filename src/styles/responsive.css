@@ -1,6 +1,23 @@
 @media (max-width: 720px) {
+  html,
+  body,
+  #app,
+  .app-root {
+    min-height: 100%;
+    height: 100%;
+  }
+
   .screen {
-    padding: 12px;
+    padding: 8px;
+  }
+
+  .game-screen {
+    width: 100%;
+    height: 100dvh;
+    min-height: 0;
+    gap: 7px;
+    overflow: hidden;
+    grid-template-rows: auto minmax(0, 1fr) auto;
   }
 
   .era-grid,
@@ -19,18 +36,26 @@
   }
 
   .stat-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 5px;
+    padding: 6px;
   }
 
   .stat-row {
     display: grid;
-    grid-template-columns: 72px 1fr;
-    align-items: center;
-    gap: 8px;
+    grid-template-columns: 1fr;
+    gap: 3px;
+    min-width: 0;
   }
 
   .stat-head {
     margin: 0;
+    font-size: 0.68rem;
+    line-height: 1.1;
+  }
+
+  .stat-track {
+    height: 6px;
   }
 
   .top-nav,
@@ -38,22 +63,184 @@
     align-items: flex-start;
   }
 
+  .game-header {
+    margin-bottom: 0;
+  }
+
+  .date-label {
+    margin-bottom: 2px;
+    font-size: 1.02rem;
+    line-height: 1.15;
+  }
+
+  .meta-line {
+    font-size: 0.74rem;
+    line-height: 1.25;
+  }
+
+  .game-body {
+    min-height: 0;
+    gap: 8px;
+    overflow: hidden;
+    grid-template-rows: clamp(210px, 34dvh, 310px) minmax(0, 1fr);
+  }
+
+  .play-surface,
+  .mobile-card-carousel,
+  .carousel-slide {
+    min-height: 0;
+  }
+
+  .mobile-card-carousel {
+    height: 100%;
+    gap: 8px;
+  }
+
+  .carousel-slide {
+    padding-bottom: 2px;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .carousel-slide > .event-card,
+  .carousel-slide > .long-term-panel,
+  .carousel-slide > .risk-panel {
+    height: 100%;
+    min-height: 100%;
+  }
+
+  .carousel-label {
+    padding: 3px 8px;
+    font-size: 0.7rem;
+  }
+
+  .card-dots span {
+    min-width: 34px;
+    padding: 2px 6px;
+    font-size: 0.66rem;
+  }
+
+  .event-card,
+  .long-term-panel,
+  .risk-panel {
+    padding: 10px;
+  }
+
   .event-card h2 {
-    font-size: 1.7rem;
+    margin-bottom: 5px;
+    font-size: 1.28rem;
+    line-height: 1.15;
+  }
+
+  .event-text,
+  .big-quote {
+    margin-bottom: 0;
+    font-size: 0.92rem;
+    line-height: 1.48;
+  }
+
+  .panel-label {
+    margin-bottom: 2px;
+    font-size: 0.68rem;
+  }
+
+  .long-term-panel {
+    gap: 8px;
+  }
+
+  .long-term-panel h2 {
+    font-size: 0.98rem;
+  }
+
+  .long-term-panel p,
+  .mini-chronicle,
+  .risk {
+    font-size: 0.76rem;
+    line-height: 1.35;
+  }
+
+  .risk-panel {
+    gap: 7px;
+  }
+
+  .risk-header {
+    display: block;
+  }
+
+  .risk-header span {
+    display: block;
+    font-size: 0.68rem;
+  }
+
+  .risk-list {
+    gap: 6px;
+  }
+
+  .risk {
+    min-height: 42px;
+    padding: 7px 8px;
+  }
+
+  .imperial-choice-panel {
+    max-height: none;
+    padding: 9px;
+    gap: 7px;
+    overflow-y: auto;
+    align-content: start;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .choice-panel-head {
+    gap: 6px;
+  }
+
+  .choice-panel-head span {
+    font-size: 0.9rem;
+  }
+
+  .choice-panel-head small {
+    font-size: 0.68rem;
+  }
+
+  .option-list {
+    gap: 7px;
+    min-height: 0;
+  }
+
+  .imperial-choice-panel .option-list {
+    height: 100%;
+    grid-auto-rows: minmax(58px, 1fr);
   }
 
   .option-btn {
-    min-height: 58px;
+    min-height: 46px;
+    padding: 9px 10px;
+    gap: 3px;
+    align-content: center;
+    font-size: 0.86rem;
+    line-height: 1.25;
+  }
+
+  .option-btn small {
+    font-size: 0.68rem;
+    line-height: 1.25;
   }
 }
 
 @media (min-width: 860px) {
   .game-body {
-    grid-template-columns: 1.05fr 0.95fr;
+    grid-template-columns: minmax(0, 1fr) 390px;
     align-items: start;
   }
 
-  .option-list {
+  .play-surface {
+    min-width: 0;
+  }
+
+  .mobile-card-carousel {
+    max-height: 58vh;
+  }
+
+  .imperial-choice-panel {
     position: sticky;
     top: 18px;
   }

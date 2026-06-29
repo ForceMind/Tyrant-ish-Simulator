@@ -16,12 +16,34 @@ export function renderMainGame(state) {
         ${button("go", "档案", "archives", "ghost small")}
       </header>
       <section class="game-body">
-        <div class="main-column">
-          ${renderLongTermPanel(state, ambition)}
-          ${renderRiskPanel(state)}
-          ${renderEventCard(state.currentEvent)}
+        <div class="play-surface">
+          <div class="mobile-card-carousel" aria-label="政务卡片横向切换">
+            <section class="carousel-slide event-slide">
+              <p class="carousel-label">奏报</p>
+              ${renderEventCard(state.currentEvent)}
+            </section>
+            <section class="carousel-slide">
+              <p class="carousel-label">政务</p>
+              ${renderLongTermPanel(state, ambition)}
+            </section>
+            <section class="carousel-slide">
+              <p class="carousel-label">暗流</p>
+              ${renderRiskPanel(state)}
+            </section>
+          </div>
+          <div class="card-dots" aria-hidden="true">
+            <span>奏报</span>
+            <span>政务</span>
+            <span>暗流</span>
+          </div>
         </div>
-        ${renderOptions(state.currentEvent.options)}
+        <section class="imperial-choice-panel" aria-label="皇帝裁断">
+          <div class="choice-panel-head">
+            <span>皇帝裁断</span>
+            <small>点一道旨意，史官马上记账</small>
+          </div>
+          ${renderOptions(state.currentEvent.options)}
+        </section>
       </section>
       ${renderStatBars(state.stats)}
     </main>

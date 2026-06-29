@@ -279,7 +279,7 @@ async function auditViewport(cdp, baseUrl, viewport, name) {
     deviceScaleFactor: viewport.scale,
     mobile: viewport.mobile
   });
-  await cdp.send("Page.navigate", { url: baseUrl });
+  await cdp.send("Page.navigate", { url: `${baseUrl}?audit=${encodeURIComponent(name)}-${Date.now()}` });
   await wait(250);
 
   await checkPage(cdp, "title");
@@ -318,7 +318,7 @@ async function longPlayAudit(cdp, baseUrl) {
     deviceScaleFactor: 2,
     mobile: true
   });
-  await cdp.send("Page.navigate", { url: baseUrl });
+  await cdp.send("Page.navigate", { url: `${baseUrl}?audit=long-${Date.now()}` });
   await wait(250);
   await click(cdp, '[data-action="newGame"]');
   await click(cdp, '[data-action="selectEra"][data-value="baofu"]');

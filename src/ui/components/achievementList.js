@@ -3,9 +3,9 @@ import { loadAchievements } from "../../core/storage.js";
 import { escapeHtml } from "../html.js";
 import { t } from "../../i18n/index.js";
 
-export function renderAchievementList() {
+export function renderAchievementList(items = ACHIEVEMENTS) {
   const unlocked = loadAchievements();
-  const rows = ACHIEVEMENTS.map((achievement) => {
+  const rows = items.map((achievement) => {
     const done = Boolean(unlocked[achievement.id]);
     return `
       <li class="achievement ${done ? "unlocked" : "locked"}">

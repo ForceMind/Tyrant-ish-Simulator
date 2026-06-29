@@ -1,6 +1,7 @@
 import { ENDING_RULES } from "../../data/endings.js";
 import { ERA_LIST } from "../../data/eras.js";
 import { AMBITIONS } from "../../data/ambitions.js";
+import { ACHIEVEMENTS } from "../../data/achievements.js";
 import { loadCodex, loadHistory, loadLastEnding } from "../../core/storage.js";
 import { renderAchievementList } from "../components/achievementList.js";
 import { button, escapeHtml } from "../html.js";
@@ -11,6 +12,12 @@ export function renderArchives(state) {
   const last = loadLastEnding();
   const codex = loadCodex();
   const selected = history.find((record) => record.id === state.selectedHistoryId) || last;
+  const historyPage = paginate(history, getArchivePage(state, "history"), 4);
+  const endingPage = paginate(ENDING_RULES, getArchivePage(state, "endings"), 4);
+  const eraPage = paginate(ERA_LIST, getArchivePage(state, "eras"), 4);
+  const ambitionPage = paginate(AMBITIONS, getArchivePage(state, "ambitions"), 4);
+  const achievementPage = paginate(ACHIEVEMENTS, getArchivePage(state, "achievements"), 6);
+  const activeTab = state.archiveTab || "records";
   const toast = state.toast ? `<p class="toast">${escapeHtml(state.toast)}</p>` : "";
   return `
     <main class="screen archive-screen">
@@ -22,7 +29,9 @@ export function renderArchives(state) {
         </div>
       </header>
       ${toast}
+      ${renderArchiveTabs(activeTab)}
       <section class="archive-layout archive-layout-rich">
+        ${activeTab === "records" ? `
         <article class="paper-panel archive-detail">
           <div class="panel-title-row">
             <h2>实录详情</h2>
@@ -31,33 +40,97 @@ export function renderArchives(state) {
           ${selected ? renderRecordDetail(selected) : `<p class="muted">${t("labels.noHistory")}</p>`}
         </article>
         <article class="paper-panel">
-          <h2>历代实录</h2>
+          <div class="panel-title-row">
+            <h2>历代实录</h2>
+            ${renderPager("history", historyPage)}
+          </div>
           <div class="history-list">
-            ${history.length ? history.map((record) => renderRecordMini(record, selected?.id)).join("") : `<p class="muted">${t("labels.noHistory")}</p>`}
+            ${historyPage.items.length ? historyPage.items.map((record) => renderRecordMini(record, selected?.id)).join("") : `<p class="muted">${t("labels.noHistory")}</p>`}
           </div>
         </article>
         <article class="paper-panel archive-wide">
           <h2>王朝总览</h2>
           ${renderCodexSummary(codex)}
         </article>
+        ` : ""}
+        ${activeTab === "codex" ? `
         <article class="paper-panel">
-          <h2>结局图鉴</h2>
-          ${renderEndingCodex(codex)}
+          <div class="panel-title-row">
+            <h2>结局图鉴</h2>
+            ${renderPager("endings", endingPage)}
+          </div>
+          ${renderEndingCodex(codex, endingPage.items)}
         </article>
         <article class="paper-panel">
-          <h2>年号熟练</h2>
-          ${renderEraMastery(codex)}
+          <div class="panel-title-row">
+            <h2>年号熟练</h2>
+            ${renderPager("eras", eraPage)}
+          </div>
+          ${renderEraMastery(codex, eraPage.items)}
         </article>
+        ` : ""}
+        ${activeTab === "ambitions" ? `
         <article class="paper-panel">
-          <h2>志向进度</h2>
-          ${renderAmbitionProgress(codex)}
+          <div class="panel-title-row">
+            <h2>志向进度</h2>
+            ${renderPager("ambitions", ambitionPage)}
+          </div>
+          ${renderAmbitionProgress(codex, ambitionPage.items)}
         </article>
+        ` : ""}
+        ${activeTab === "achievements" ? `
         <article class="paper-panel archive-wide">
-          <h2>成就</h2>
-          ${renderAchievementList()}
+          <div class="panel-title-row">
+            <h2>成就</h2>
+            ${renderPager("achievements", achievementPage)}
+          </div>
+          ${renderAchievementList(achievementPage.items)}
         </article>
+        ` : ""}
       </section>
     </main>
+  `;
+}
+
+function renderArchiveTabs(activeTab) {
+  const tabs = [
+    ["records", "实录"],
+    ["codex", "图鉴"],
+    ["ambitions", "志向"],
+    ["achievements", "成就"]
+  ];
+  return `
+    <nav class="archive-tabs" aria-label="档案分页">
+      ${tabs.map(([key, label]) => `
+        <button class="btn small ${activeTab === key ? "primary" : "ghost"}" type="button" data-action="archiveTab" data-value="${key}">${label}</button>
+      `).join("")}
+    </nav>
+  `;
+}
+
+function getArchivePage(state, key) {
+  return Math.max(1, Number(state.archivePages?.[key]) || 1);
+}
+
+function paginate(items, page, pageSize) {
+  const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
+  const current = Math.min(Math.max(1, page), totalPages);
+  const start = (current - 1) * pageSize;
+  return {
+    current,
+    totalPages,
+    items: items.slice(start, start + pageSize)
+  };
+}
+
+function renderPager(key, page) {
+  if (page.totalPages <= 1) return "";
+  return `
+    <div class="pager" aria-label="分页">
+      <button class="btn ghost small" type="button" data-action="archivePage" data-value="${escapeHtml(`${key}:${page.current - 1}`)}" ${page.current <= 1 ? "disabled" : ""}>上页</button>
+      <span>${page.current}/${page.totalPages}</span>
+      <button class="btn ghost small" type="button" data-action="archivePage" data-value="${escapeHtml(`${key}:${page.current + 1}`)}" ${page.current >= page.totalPages ? "disabled" : ""}>下页</button>
+    </div>
   `;
 }
 
@@ -135,10 +208,10 @@ function renderCodexSummary(codex) {
   return `<div class="codex-summary">${rows.map(([label, value]) => `<span><b>${label}</b>${value}</span>`).join("")}</div>`;
 }
 
-function renderEndingCodex(codex) {
+function renderEndingCodex(codex, endings) {
   return `
     <div class="codex-grid">
-      ${ENDING_RULES.map((ending) => {
+      ${endings.map((ending) => {
         const found = codex.endings?.[ending.id];
         return `
           <div class="codex-item ${found ? "found" : "unknown"}">
@@ -152,10 +225,10 @@ function renderEndingCodex(codex) {
   `;
 }
 
-function renderEraMastery(codex) {
+function renderEraMastery(codex, eras) {
   return `
     <div class="codex-grid">
-      ${ERA_LIST.map((era) => {
+      ${eras.map((era) => {
         const found = codex.eras?.[era.id] || Object.values(codex.eras || {}).find((item) => item.name === era.name);
         const level = getEraLevel(found);
         return `
@@ -170,10 +243,10 @@ function renderEraMastery(codex) {
   `;
 }
 
-function renderAmbitionProgress(codex) {
+function renderAmbitionProgress(codex, ambitions) {
   return `
     <div class="codex-grid">
-      ${AMBITIONS.map((ambition) => {
+      ${ambitions.map((ambition) => {
         const found = codex.ambitions?.[ambition.id];
         return `
           <div class="codex-item ${found?.completed ? "found" : "unknown"}">

@@ -160,8 +160,12 @@ function checkCodex() {
   state.screen = "archives";
   render(root, state);
   assert(root.innerHTML.includes("王朝总览"), "档案页缺少王朝总览");
+  state.archiveTab = "codex";
+  render(root, state);
   assert(root.innerHTML.includes("结局图鉴"), "档案页缺少结局图鉴");
   assert(root.innerHTML.includes("年号熟练"), "档案页缺少年号熟练");
+  state.archiveTab = "ambitions";
+  render(root, state);
   assert(root.innerHTML.includes("志向进度"), "档案页缺少志向进度");
 }
 

@@ -51,6 +51,8 @@ export function createInitialState() {
     nextDecreeTurn: 18,
     chronicle: [],
     achievementsUnlockedNow: [],
+    archivePages: {},
+    archiveTab: "records",
     seenEventIds: [],
     bombCooldown: {},
     counters: {

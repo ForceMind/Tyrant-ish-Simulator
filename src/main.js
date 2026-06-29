@@ -72,6 +72,19 @@ const actions = {
     state.screen = "archives";
     renderApp();
   },
+  archivePage(value) {
+    const [key, pageText] = String(value || "").split(":");
+    const page = Math.max(1, Number(pageText) || 1);
+    if (!key) return;
+    state.archivePages = { ...state.archivePages, [key]: page };
+    state.screen = "archives";
+    renderApp();
+  },
+  archiveTab(value) {
+    state.archiveTab = value || "records";
+    state.screen = "archives";
+    renderApp();
+  },
   closeHistory() {
     state.selectedHistoryId = "";
     renderApp();

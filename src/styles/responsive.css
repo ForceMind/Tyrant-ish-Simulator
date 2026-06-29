@@ -39,9 +39,12 @@
 
   .risk-list,
   .final-stat-strip,
-  .codex-summary,
   .codex-grid {
     grid-template-columns: 1fr;
+  }
+
+  .codex-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .stat-grid {
@@ -212,6 +215,38 @@
     min-height: 42px;
   }
 
+  .archive-screen .panel-title-row {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .archive-screen .pager {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .archive-detail {
+    min-height: 220px;
+  }
+
+  .archive-tabs {
+    gap: 6px;
+  }
+
+  .archive-tabs .btn {
+    min-height: 40px;
+    padding: 8px 6px;
+  }
+
+  .archive-screen .paper-panel {
+    padding: 14px;
+  }
+
+  .archive-screen .codex-summary span {
+    min-height: 58px;
+    padding: 8px;
+  }
+
   .panel-label {
     margin-bottom: 2px;
     font-size: 0.68rem;
@@ -311,7 +346,27 @@
   }
 
   .mobile-card-carousel {
-    max-height: 58vh;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.58fr);
+    grid-template-rows: auto auto;
+    align-items: stretch;
+    max-height: none;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .carousel-slide {
+    flex: initial;
+    overflow: visible;
+    scroll-snap-align: none;
+  }
+
+  .carousel-slide.event-slide {
+    grid-row: 1 / span 2;
+  }
+
+  .play-surface > .card-dots {
+    display: none;
   }
 
   .imperial-choice-panel {

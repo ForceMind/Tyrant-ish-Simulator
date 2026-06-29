@@ -336,7 +336,7 @@ async function longPlayAudit(cdp, baseUrl) {
   await wait(250);
   await evaluate(cdp, `localStorage.clear(); true`);
   await cdp.send("Page.navigate", { url: `${baseUrl}?audit=long-${Date.now()}` });
-  await wait(250);
+  await wait(600);
   await click(cdp, '[data-action="go"][data-value="title"]');
   await click(cdp, '[data-action="newGame"]');
   await click(cdp, '[data-action="selectEra"][data-value="baofu"]');

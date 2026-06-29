@@ -719,11 +719,12 @@
   .game-body {
     display: grid;
     grid-template-columns: minmax(430px, 1.08fr) minmax(300px, 0.8fr) minmax(400px, 1fr);
-    grid-template-rows: minmax(250px, auto) minmax(128px, auto);
+    grid-template-rows: minmax(0, 1fr) minmax(132px, 0.38fr);
     grid-template-areas:
       "event policy choices"
       "event risk choices";
     gap: 14px;
+    height: clamp(500px, calc(100vh - 246px), 610px);
     min-height: 0;
     align-items: stretch;
   }
@@ -742,27 +743,35 @@
   }
 
   .game-screen .event-card {
-    min-height: 430px;
+    min-height: 0;
     height: 100%;
     padding: 28px;
+    overflow-y: auto;
   }
 
   .game-screen .long-term-panel,
   .game-screen .risk-panel {
     height: 100%;
     min-height: 0;
+    overflow-y: auto;
   }
 
   .game-screen .imperial-choice-panel {
-    min-height: 430px;
+    min-height: 0;
     height: 100%;
     padding: 18px;
     align-self: stretch;
+    overflow: hidden;
+    grid-template-rows: auto minmax(0, 1fr);
   }
 
   .carousel-slide {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    height: 100%;
+    min-height: 0;
     flex: initial;
-    overflow: visible;
+    overflow: hidden;
     scroll-snap-align: none;
   }
 
@@ -799,6 +808,8 @@
   .game-screen .option-list {
     gap: 14px;
     align-content: start;
+    min-height: 0;
+    overflow-y: auto;
   }
 
   .game-screen .option-btn {
@@ -814,8 +825,9 @@
 
   .game-screen .stat-row {
     display: grid;
-    gap: 8px;
-    min-height: 104px;
+    grid-template-rows: auto auto minmax(38px, 1fr);
+    gap: 7px;
+    min-height: 112px;
     padding: 10px;
     border-radius: 8px;
     background: rgba(255, 250, 229, 0.72);

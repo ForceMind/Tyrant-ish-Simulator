@@ -10,25 +10,23 @@ export function renderWebsite() {
         </div>
         <div class="site-nav-links">
           <span class="active">首页</span>
-          <span>游戏特色</span>
-          <span>玩法介绍</span>
-          <button type="button" data-action="go" data-value="archives">史官档案</button>
+          <a href="#site-features">游戏特色</a>
+          <a href="#site-gameplay">玩法介绍</a>
         </div>
-        ${button("go", "进入游戏大厅", "title", "primary site-nav-cta")}
       </nav>
       <section class="site-hero">
         <div class="site-copy">
-          <p class="seal">单机 H5 休闲策略 Roguelike</p>
+          <p class="seal">休闲策略 Roguelike</p>
           <h1>当皇帝不难，难的是别把锅留到下个月。</h1>
-          <p class="subtitle">从年号开始作死，用选择制造历史。完整模式慢慢亡国，快速版几分钟看完一段荒唐王朝小传。</p>
+          <p class="subtitle">从年号开始作死，用选择制造历史。长线王朝慢慢养雷，速写王朝几分钟看完一段荒唐帝王小传。</p>
           <div class="site-actions">
-            ${button("go", "进入游戏大厅", "title", "primary")}
-            ${button("go", "快速体验", "quickSetup")}
+            ${button("go", "开始登基", "title", "primary")}
+            ${button("go", "速写王朝", "quickSetup")}
             ${button("go", "史官档案", "archives", "ghost")}
           </div>
         </div>
         <div class="site-visual" aria-label="王朝荒唐速写">
-          <div class="preview-ribbon">快速版实录</div>
+          <div class="preview-ribbon">王朝预览</div>
           <div class="palace-roof" aria-hidden="true"></div>
           <div class="court-stage" aria-hidden="true">
             <span class="official official-left"></span>
@@ -49,18 +47,32 @@ export function renderWebsite() {
           <div class="mini-edict">朕错了<br>但不改</div>
         </div>
       </section>
-      <section class="site-feature-grid">
+      <section class="site-feature-grid" id="site-features">
         <article>
-          <b>完整模式</b>
+          <b>长线王朝</b>
           <span>年号、志向、诏令、月度事件、隐藏爆雷，慢慢把小错误养成新朝代。</span>
         </article>
         <article>
-          <b>快速版</b>
+          <b>速写王朝</b>
           <span>像人生模拟器一样先选底色和麻烦，再用 5 到 10 个关键选择速通一段帝王履历。</span>
         </article>
         <article>
           <b>黑色幽默</b>
           <span>每个选项都不是“确认”，而是一次能让史官停笔三秒的荒唐决定。</span>
+        </article>
+      </section>
+      <section class="site-gameplay" id="site-gameplay">
+        <article>
+          <b>开局先定年号</b>
+          <span>年号不是装饰，它决定初始数值、事件倾向和你这朝一开始就歪到哪里。</span>
+        </article>
+        <article>
+          <b>每月处理一件事</b>
+          <span>每个选择都有回应、数值变化和隐藏后果。先爽的决定，几年后会回来敲门。</span>
+        </article>
+        <article>
+          <b>结局交给史官</b>
+          <span>亡国、修仙失败、太监傀儡、千古明君都能写进实录，评价通常不太客气。</span>
         </article>
       </section>
       <section class="site-strip">

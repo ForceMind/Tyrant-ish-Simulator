@@ -22,7 +22,7 @@ export function renderArchives(state) {
   return `
     <main class="screen archive-screen">
       <header class="top-nav">
-        ${button("go", t("buttons.back"), state.era ? "main" : "title", "ghost")}
+        ${button("backFromArchives", t("buttons.back"), "", "ghost")}
         <div>
           <p class="seal">史官档案</p>
           <h1>功过簿</h1>

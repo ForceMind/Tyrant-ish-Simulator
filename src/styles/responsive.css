@@ -25,26 +25,25 @@
   }
 
   .site-brand span,
-  .site-nav-links span {
+  .site-nav-links span.active {
     display: none;
   }
 
   .site-nav-links {
     display: flex;
     flex: 0 0 auto;
-    gap: 0;
+    gap: 6px;
   }
 
-  .site-nav-links button,
-  .site-nav-cta {
+  .site-nav-links a {
     min-width: auto;
     min-height: 36px;
-    padding: 7px 9px;
+    padding: 10px 8px;
     font-size: 0.76rem;
     line-height: 1.1;
   }
 
-  .site-nav-links button {
+  .site-nav-links a {
     border: 1px solid rgba(143, 29, 29, 0.35);
     border-radius: 8px;
     background: rgba(255, 246, 218, 0.72);
@@ -173,7 +172,8 @@
   .quick-param-options,
   .quick-play-layout,
   .site-hero,
-  .site-feature-grid {
+  .site-feature-grid,
+  .site-gameplay {
     grid-template-columns: 1fr;
   }
 

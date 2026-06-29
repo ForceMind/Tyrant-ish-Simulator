@@ -59,15 +59,16 @@
 }
 
 .site-nav-links span,
-.site-nav-links button {
+.site-nav-links a {
   border: 0;
   background: transparent;
   color: inherit;
   cursor: pointer;
   font-weight: 900;
+  text-decoration: none;
 }
 
-.site-nav-links button {
+.site-nav-links a {
   min-height: 36px;
   padding: 6px 2px;
 }
@@ -268,7 +269,8 @@
   box-shadow: 0 12px 28px rgba(75, 37, 16, 0.18);
 }
 
-.site-feature-grid {
+.site-feature-grid,
+.site-gameplay {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
@@ -276,23 +278,27 @@
 }
 
 .site-feature-grid article,
+.site-gameplay article,
 .site-strip {
   border: 1px solid rgba(104, 60, 28, 0.22);
   border-radius: 8px;
   background: rgba(255, 246, 218, 0.72);
 }
 
-.site-feature-grid article {
+.site-feature-grid article,
+.site-gameplay article {
   display: grid;
   gap: 8px;
   padding: 14px;
 }
 
-.site-feature-grid b {
+.site-feature-grid b,
+.site-gameplay b {
   color: #8f1d1d;
 }
 
-.site-feature-grid span {
+.site-feature-grid span,
+.site-gameplay span {
   color: #5c3d26;
   line-height: 1.45;
 }

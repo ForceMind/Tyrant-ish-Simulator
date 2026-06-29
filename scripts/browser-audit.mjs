@@ -280,10 +280,14 @@ async function auditViewport(cdp, baseUrl, viewport, name) {
     mobile: viewport.mobile
   });
   await cdp.send("Page.navigate", { url: `${baseUrl}?audit=${encodeURIComponent(name)}-${Date.now()}` });
-  await wait(250);
+  await wait(600);
 
   await checkPage(cdp, "website");
   await capture(cdp, `${name}-website`);
+  await click(cdp, '[data-action="go"][data-value="archives"]');
+  await checkPage(cdp, "website-archives");
+  await click(cdp, '[data-action="backFromArchives"]');
+  await checkPage(cdp, "website-return");
   await auditQuickMode(cdp, `${name}-quick`);
   await click(cdp, '[data-action="go"][data-value="title"]');
   await checkPage(cdp, "title");

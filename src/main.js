@@ -10,6 +10,7 @@ let state = createInitialState();
 
 const actions = {
   go(screen) {
+    if (screen === "archives") state.returnScreen = state.screen || "website";
     state.screen = screen;
     renderApp();
   },
@@ -50,6 +51,7 @@ const actions = {
       state = saved;
       renderApp();
     } else {
+      state.returnScreen = state.screen || "title";
       state.screen = "archives";
       state.toast = "史官翻遍竹简，只找到一张空白欠条。";
       renderApp();
@@ -111,6 +113,10 @@ const actions = {
   archiveTab(value) {
     state.archiveTab = value || "records";
     state.screen = "archives";
+    renderApp();
+  },
+  backFromArchives() {
+    state.screen = state.returnScreen || (state.era ? "main" : "website");
     renderApp();
   },
   closeHistory() {

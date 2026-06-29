@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1366" height="768" viewBox="0 0 1366 768">
+  <rect width="1366" height="768" fill="#efd49a"/>
+  <rect x="120" y="22" width="1126" height="724" rx="12" fill="#f6e5bd" opacity=".45"/>
+  <text x="142" y="42" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="700" fill="#8f1d1d">Shit皇帝</text>
+  <text x="1066" y="42" font-family="Microsoft YaHei, sans-serif" font-size="18" fill="#6d2a19">My Bad, Your Empire</text>
+
+  <text x="142" y="126" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="700" fill="#8f1d1d">单机 H5 休闲策略 Roguelike</text>
+  <text x="142" y="202" font-family="Microsoft YaHei, sans-serif" font-size="68" font-weight="900" fill="#35180c">当皇帝不难，</text>
+  <text x="142" y="282" font-family="Microsoft YaHei, sans-serif" font-size="68" font-weight="900" fill="#35180c">难的是别把锅</text>
+  <text x="142" y="362" font-family="Microsoft YaHei, sans-serif" font-size="68" font-weight="900" fill="#35180c">留到下个月。</text>
+  <text x="142" y="428" font-family="Microsoft YaHei, sans-serif" font-size="18" fill="#5c3d26">从年号开始作死，用选择制造历史。完整模式慢慢亡国，快速版几分钟看完一段荒唐王朝小传。</text>
+
+  <rect x="142" y="486" width="128" height="46" rx="8" fill="#a82b24"/>
+  <text x="168" y="516" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="700" fill="#fff6dd">进入游戏</text>
+  <rect x="282" y="486" width="96" height="46" rx="8" fill="#fff1c9" stroke="#8b5728"/>
+  <text x="302" y="516" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="700" fill="#4b2510">快速版</text>
+  <rect x="390" y="486" width="96" height="46" rx="8" fill="#fff1c9" stroke="#8b5728"/>
+  <text x="410" y="516" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="700" fill="#4b2510">档案</text>
+
+  <rect x="720" y="106" width="504" height="430" rx="8" fill="#f2c776" stroke="#b98243"/>
+  <rect x="762" y="164" width="420" height="96" rx="4" fill="#bd8643"/>
+  <polygon points="762,260 870,164 963,164 856,260" fill="#8f1d1d"/>
+  <polygon points="982,260 1090,164 1182,164 1074,260" fill="#a82b24"/>
+  <rect x="782" y="278" width="362" height="180" rx="8" fill="#fff1c9" stroke="#b85b63" stroke-width="2"/>
+  <rect x="802" y="298" width="322" height="40" rx="8" fill="#ecd1aa"/>
+  <rect x="802" y="350" width="322" height="40" rx="8" fill="#ecd1aa"/>
+  <rect x="802" y="402" width="322" height="40" rx="8" fill="#ecd1aa"/>
+  <text x="812" y="324" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="700" fill="#35180c">奏折 +80</text>
+  <text x="812" y="376" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="700" fill="#35180c">快乐 -12</text>
+  <text x="812" y="428" font-family="Microsoft YaHei, sans-serif" font-size="17" font-weight="700" fill="#35180c">民怨 暗流涌动</text>
+  <rect x="1068" y="357" width="116" height="136" rx="8" fill="#fff6da" stroke="#b98243"/>
+  <text x="1093" y="404" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="900" fill="#8f1d1d">朕错了</text>
+  <text x="1093" y="438" font-family="Microsoft YaHei, sans-serif" font-size="24" font-weight="900" fill="#8f1d1d">但不改</text>
+
+  <rect x="142" y="590" width="350" height="104" rx="8" fill="#fff6da" stroke="#d1b47b"/>
+  <rect x="506" y="590" width="350" height="104" rx="8" fill="#fff6da" stroke="#d1b47b"/>
+  <rect x="870" y="590" width="354" height="104" rx="8" fill="#fff6da" stroke="#d1b47b"/>
+  <text x="156" y="622" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="900" fill="#8f1d1d">完整模式</text>
+  <text x="520" y="622" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="900" fill="#8f1d1d">快速版</text>
+  <text x="884" y="622" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="900" fill="#8f1d1d">黑色幽默</text>
+  <text x="156" y="654" font-family="Microsoft YaHei, sans-serif" font-size="16" fill="#5c3d26">年号、志向、诏令、月度事件。</text>
+  <text x="520" y="654" font-family="Microsoft YaHei, sans-serif" font-size="16" fill="#5c3d26">参数开局，关键选择速通一朝。</text>
+  <text x="884" y="654" font-family="Microsoft YaHei, sans-serif" font-size="16" fill="#5c3d26">每个选择都要有梗和后果。</text>
+</svg>
+

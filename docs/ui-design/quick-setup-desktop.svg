@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1366" height="768" viewBox="0 0 1366 768">
+  <rect width="1366" height="768" fill="#efd49a"/>
+  <rect x="212" y="50" width="94" height="44" rx="8" fill="#fff1c9" stroke="#8b5728"/>
+  <text x="228" y="79" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="900" fill="#4b2510">返回官网</text>
+  <text x="580" y="36" font-family="Microsoft YaHei, sans-serif" font-size="18" font-weight="900" fill="#8f1d1d">快速版</text>
+  <text x="580" y="105" font-family="Microsoft YaHei, sans-serif" font-size="58" font-weight="900" fill="#35180c">三分钟写完一朝实录</text>
+
+  <g font-family="Microsoft YaHei, sans-serif">
+    <rect x="212" y="142" width="465" height="295" rx="8" fill="#fff1c9" stroke="#c7a56d"/>
+    <text x="232" y="184" font-size="18" font-weight="900" fill="#8f1d1d">皇帝底色</text>
+    <rect x="232" y="216" width="205" height="95" rx="8" fill="#ead1ae" stroke="#8f1d1d"/>
+    <rect x="449" y="216" width="205" height="95" rx="8" fill="#fff6da" stroke="#d1b47b"/>
+    <rect x="232" y="320" width="205" height="95" rx="8" fill="#fff6da" stroke="#d1b47b"/>
+    <rect x="449" y="320" width="205" height="95" rx="8" fill="#fff6da" stroke="#d1b47b"/>
+    <text x="246" y="253" font-size="18" font-weight="900" fill="#8f1d1d">床榻治国</text>
+    <text x="463" y="253" font-size="18" font-weight="900" fill="#8f1d1d">卷王登基</text>
+    <text x="246" y="358" font-size="18" font-weight="900" fill="#8f1d1d">国库优先</text>
+    <text x="463" y="358" font-size="18" font-weight="900" fill="#8f1d1d">飞升预备</text>
+
+    <rect x="690" y="142" width="465" height="295" rx="8" fill="#fff1c9" stroke="#c7a56d"/>
+    <text x="710" y="184" font-size="18" font-weight="900" fill="#8f1d1d">施政习惯</text>
+    <rect x="710" y="216" width="205" height="95" rx="8" fill="#ead1ae" stroke="#8f1d1d"/>
+    <rect x="927" y="216" width="205" height="95" rx="8" fill="#fff6da" stroke="#d1b47b"/>
+    <rect x="710" y="320" width="205" height="95" rx="8" fill="#fff6da" stroke="#d1b47b"/>
+    <rect x="927" y="320" width="205" height="95" rx="8" fill="#fff6da" stroke="#d1b47b"/>
+    <text x="724" y="253" font-size="18" font-weight="900" fill="#8f1d1d">先像个人</text>
+    <text x="941" y="253" font-size="18" font-weight="900" fill="#8f1d1d">铁拳提速</text>
+    <text x="724" y="358" font-size="18" font-weight="900" fill="#8f1d1d">授权专业人士</text>
+    <text x="941" y="358" font-size="18" font-weight="900" fill="#8f1d1d">快乐优先</text>
+
+    <rect x="212" y="450" width="465" height="120" rx="8" fill="#fff1c9" stroke="#c7a56d"/>
+    <text x="232" y="492" font-size="18" font-weight="900" fill="#8f1d1d">开局麻烦</text>
+    <text x="232" y="532" font-size="16" fill="#5c3d26">国库、边关、后宫、祥瑞四选一</text>
+    <rect x="690" y="450" width="465" height="120" rx="8" fill="#fff1c9" stroke="#c7a56d"/>
+    <text x="710" y="492" font-size="18" font-weight="900" fill="#8f1d1d">推演速度</text>
+    <text x="710" y="532" font-size="16" fill="#5c3d26">5 到 10 个关键选择，决定节奏</text>
+
+    <rect x="212" y="590" width="943" height="86" rx="8" fill="#fff6da" stroke="#c7a56d"/>
+    <text x="232" y="640" font-size="22" font-weight="900" fill="#35180c">快速登基说明：参数先决定初始局势，再进入关键节点。</text>
+    <rect x="1006" y="612" width="128" height="44" rx="8" fill="#a82b24"/>
+    <text x="1025" y="641" font-size="18" font-weight="900" fill="#fff6dd">开始速写</text>
+  </g>
+</svg>
+

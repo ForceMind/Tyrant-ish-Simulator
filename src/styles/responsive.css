@@ -758,9 +758,9 @@
 
   .game-screen .imperial-choice-panel {
     min-height: 0;
-    height: 100%;
+    height: calc(100% - 32px);
     padding: 18px;
-    align-self: stretch;
+    align-self: end;
     overflow: hidden;
     grid-template-rows: auto minmax(0, 1fr);
   }
@@ -807,7 +807,9 @@
 
   .game-screen .option-list {
     gap: 14px;
-    align-content: start;
+    height: 100%;
+    align-content: space-evenly;
+    grid-auto-rows: minmax(82px, max-content);
     min-height: 0;
     overflow-y: auto;
   }

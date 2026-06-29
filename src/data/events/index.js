@@ -11,6 +11,7 @@ import { peopleEvents } from "./people.js";
 import { pleasureEvents } from "./pleasure.js";
 import { rareEvents } from "./rare.js";
 import { treasuryEvents } from "./treasury.js";
+import { v02BombEvents, v02ExpansionEvents } from "./v02Expansion.js";
 
 export const EVENT_POOL = [
   ...courtEvents,
@@ -24,7 +25,11 @@ export const EVENT_POOL = [
   ...eraSpecificEvents,
   ...longGameEvents,
   ...chainEvents,
-  ...rareEvents
+  ...rareEvents,
+  ...v02ExpansionEvents
 ];
 
-export const BOMB_EVENTS = bombEvents;
+export const BOMB_EVENTS = [
+  ...bombEvents,
+  ...v02BombEvents
+];

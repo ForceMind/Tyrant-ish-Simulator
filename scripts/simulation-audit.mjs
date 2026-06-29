@@ -27,13 +27,13 @@ const PROFILES = [
     era: "qinzheng",
     ambition: "renovate_realm",
     weights: {
-      treasury: 1.2,
+      treasury: 2.4,
       people: 2.2,
-      army: 1.4,
+      army: 1.8,
       court: 2.1,
-      happiness: 1.2,
-      health: 2.2,
-      prestige: 1.2,
+      happiness: 2.0,
+      health: 2.6,
+      prestige: 1.6,
       corruption: -2.4,
       resentment: -2.4,
       famine: -2.2,
@@ -43,15 +43,17 @@ const PROFILES = [
       eunuch: -2.2,
       princeAmbition: -1.6,
       mandate: 0.2
-    }
+    },
+    balance: { mainTarget: 78, metaTarget: 62, main: 3.2, hidden: 2.2, meta: 2.2 }
   },
   {
     id: "eunuch",
     label: "太监放权线",
     era: "moyu",
     ambition: "happy_throne",
-    weights: { eunuch: 5, court: -2.4, happiness: 1.4, health: 0.4, treasury: 0.3, corruption: 1.2 },
-    counterWeights: { eunuchDelegations: 8 }
+    weights: { eunuch: 8, court: -3, happiness: 1.4, health: 0.4, treasury: -0.8, people: 0.6, resentment: -1.2, corruption: -0.6 },
+    counterWeights: { eunuchDelegations: 10, alchemyCount: -12 },
+    tagWeights: { "太监": 4, "炼丹": -8, "修仙": -6 }
   },
   {
     id: "alchemy",
@@ -90,8 +92,9 @@ const PROFILES = [
     label: "东宫失控线",
     era: "yongle",
     ambition: "happy_throne",
-    weights: { princeAmbition: 5, intrigue: 2.2, health: -2.4, prestige: -2.2, happiness: 1, court: -0.8 },
-    tagWeights: { "皇子": 3, "宫斗": 2, "外戚": 1 }
+    weights: { princeAmbition: 8, intrigue: 3.2, health: -0.8, prestige: -3.8, happiness: 1, court: -0.8, mandate: -1.2 },
+    counterWeights: { alchemyCount: -20, consecutivePills: -10 },
+    tagWeights: { "皇子": 8, "宫斗": 4, "外戚": 3, "炼丹": -10, "修仙": -8, "道士": -8 }
   },
   {
     id: "worker",
@@ -155,7 +158,7 @@ function runScenario(profile, seed, maxMonths = 216) {
       seenSet.add(eventId);
       seenEvents.push(eventId);
 
-      applyOption(state, chooseOptionIndex(state.currentEvent, profile));
+      applyOption(state, chooseOptionIndex(state.currentEvent, profile, state));
 
       if ((month + 1) % 24 === 0 || state.screen === "ending") {
         checkpoints.push(snapshot(state, month + 1));
@@ -181,11 +184,11 @@ function runScenario(profile, seed, maxMonths = 216) {
   });
 }
 
-function chooseOptionIndex(event, profile) {
+function chooseOptionIndex(event, profile, state) {
   let bestIndex = 0;
   let bestScore = -Infinity;
   event.options.forEach((option, index) => {
-    const score = scoreOption(event, option, profile);
+    const score = scoreOption(event, option, profile, state);
     if (score > bestScore) {
       bestScore = score;
       bestIndex = index;
@@ -194,11 +197,12 @@ function chooseOptionIndex(event, profile) {
   return bestIndex;
 }
 
-function scoreOption(event, option, profile) {
+function scoreOption(event, option, profile, state) {
   let score = 0;
   Object.entries(option.effects || {}).forEach(([key, delta]) => {
     score += (profile.weights[key] || 0) * delta;
   });
+  if (profile.balance) score += scoreBalance(option.effects || {}, profile.balance, state);
   Object.entries(option.counters || {}).forEach(([key, delta]) => {
     score += (profile.counterWeights?.[key] || 0) * delta;
   });
@@ -206,6 +210,32 @@ function scoreOption(event, option, profile) {
     score += profile.tagWeights?.[tag] || 0;
   });
   return score;
+}
+
+function scoreBalance(effects, balance, state) {
+  let score = 0;
+  MAIN_KEYS.forEach((key) => {
+    const before = state.stats[key];
+    const after = clampScore(before + (effects[key] || 0));
+    const target = balance.mainTarget ?? 75;
+    score += (Math.abs(before - target) - Math.abs(after - target)) * (balance.main || 1);
+  });
+  ["health", "prestige"].forEach((key) => {
+    const before = state.meta[key];
+    const after = clampScore(before + (effects[key] || 0));
+    const target = balance.metaTarget ?? 60;
+    score += (Math.abs(before - target) - Math.abs(after - target)) * (balance.meta || 1);
+  });
+  HIDDEN_KEYS.forEach((key) => {
+    const before = state.hidden[key];
+    const after = clampScore(before + (effects[key] || 0), 0, 120);
+    score += (before - after) * (balance.hidden || 1);
+  });
+  return score;
+}
+
+function clampScore(value, min = 0, max = 100) {
+  return Math.max(min, Math.min(max, value));
 }
 
 function chooseDecreeId(state, profile) {
@@ -274,11 +304,13 @@ const results = PROFILES.flatMap((profile, profileIndex) => (
 ));
 
 const duplicateCount = results.reduce((sum, result) => sum + result.duplicateEvents.length, 0);
+const timelineGapCount = results.reduce((sum, result) => sum + result.timelineGaps, 0);
 const naturalEndings = new Set(results.map((result) => result.ending).filter((id) => id !== "not_finished"));
 const endingRuleIds = new Set(ENDING_RULES.map((ending) => ending.id));
 
 assert(duplicateCount === 0, `普通事件重复出现 ${duplicateCount} 次`);
-assert(naturalEndings.size >= 4, `自然模拟结局覆盖不足：${[...naturalEndings].join(", ")}`);
+assert(timelineGapCount === 0, `事件池仍有 ${timelineGapCount} 次 timeline_gap`);
+assert(naturalEndings.size >= 8, `自然模拟结局覆盖不足：${[...naturalEndings].join(", ")}`);
 assert(endingRuleIds.size >= 8, "结局规则不足 8 种");
 
 console.log(JSON.stringify({

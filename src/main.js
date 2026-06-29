@@ -150,6 +150,7 @@ function bindGlobalActions() {
   document.addEventListener("click", (event) => {
     const target = event.target.closest("[data-action]");
     if (!target) return;
+    event.preventDefault();
     const action = target.dataset.action;
     const value = target.dataset.value;
     if (actions[action]) actions[action](value);

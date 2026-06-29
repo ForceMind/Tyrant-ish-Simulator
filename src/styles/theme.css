@@ -364,7 +364,8 @@
   color: #8f1d1d;
 }
 
-.btn[disabled] {
+.btn[disabled],
+.btn.disabled {
   cursor: not-allowed;
   opacity: 0.48;
   transform: none;
@@ -861,9 +862,15 @@
 
 .quick-setup-actions {
   display: grid;
-  grid-template-columns: auto minmax(160px, 1fr) auto;
+  grid-template-columns: minmax(160px, 240px);
   gap: 8px;
   align-items: center;
+  justify-content: end;
+}
+
+.quick-mobile-meta,
+.quick-page-link {
+  display: none;
 }
 
 .quick-start-panel p {

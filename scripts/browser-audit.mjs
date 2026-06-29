@@ -524,7 +524,12 @@ async function checkPage(cdp, label) {
   const metrics = await evaluate(cdp, `(() => {
     const doc = document.documentElement;
     const buttons = [...document.querySelectorAll('button')];
-    const rects = buttons.map((button) => {
+    const visibleButtons = buttons.filter((button) => {
+      const style = getComputedStyle(button);
+      const r = button.getBoundingClientRect();
+      return style.display !== 'none' && style.visibility !== 'hidden' && r.width > 0 && r.height > 0;
+    });
+    const rects = visibleButtons.map((button) => {
       const r = button.getBoundingClientRect();
       return { text: button.innerText, width: r.width, height: r.height, left: r.left, right: r.right };
     });
@@ -532,7 +537,7 @@ async function checkPage(cdp, label) {
       label: ${JSON.stringify(label)},
       text: document.body.innerText,
       mainCount: document.querySelectorAll('main').length,
-      buttonCount: buttons.length,
+      buttonCount: visibleButtons.length,
       scrollWidth: doc.scrollWidth,
       clientWidth: doc.clientWidth,
       emptyButtons: rects.filter((r) => !r.text.trim()).length,

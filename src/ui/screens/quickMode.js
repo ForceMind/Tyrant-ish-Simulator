@@ -14,11 +14,11 @@ export function renderQuickSetup(state) {
         <div>
           <p class="seal">快速版</p>
           <h1>三分钟写完一朝实录</h1>
-          <p class="meta-line">第 ${page + 1}/${QUICK_PARAM_GROUPS.length} 组 · ${escapeHtml(group.title)}</p>
+          <p class="meta-line quick-mobile-meta">第 ${page + 1}/${QUICK_PARAM_GROUPS.length} 组 · ${escapeHtml(group.title)}</p>
         </div>
       </header>
       <section class="quick-setup-grid">
-        ${renderParamGroup(group, params[group.key] || group.options[0].id)}
+        ${QUICK_PARAM_GROUPS.map((item, index) => renderParamGroup(item, params[item.key] || item.options[0].id, index === page)).join("")}
       </section>
       <section class="quick-start-panel paper-panel">
         <div>
@@ -26,9 +26,9 @@ export function renderQuickSetup(state) {
           <p>先选皇帝底色、施政习惯、开局麻烦和推演速度。系统会自动压缩几年时间，只在关键节点让你拍板。</p>
         </div>
         <div class="quick-setup-actions">
-          <button class="btn ghost" type="button" data-action="quickSetupPage" data-value="${page - 1}" ${page === 0 ? "disabled" : ""}>上一组</button>
+          <a class="btn ghost quick-page-link ${page === 0 ? "disabled" : ""}" href="#quick-setup" data-action="quickSetupPage" data-value="${page - 1}" aria-disabled="${page === 0}">上一组</a>
           ${button("startQuick", "开始速写王朝", "", "primary")}
-          <button class="btn ghost" type="button" data-action="quickSetupPage" data-value="${page + 1}" ${page === QUICK_PARAM_GROUPS.length - 1 ? "disabled" : ""}>下一组</button>
+          <a class="btn ghost quick-page-link ${page === QUICK_PARAM_GROUPS.length - 1 ? "disabled" : ""}" href="#quick-setup" data-action="quickSetupPage" data-value="${page + 1}" aria-disabled="${page === QUICK_PARAM_GROUPS.length - 1}">下一组</a>
         </div>
       </section>
     </main>
@@ -115,9 +115,9 @@ export function renderQuickEnding(state) {
   `;
 }
 
-function renderParamGroup(group, selectedId) {
+function renderParamGroup(group, selectedId, active = false) {
   return `
-    <section class="paper-panel quick-param-group">
+    <section class="paper-panel quick-param-group ${active ? "active" : ""}">
       <div>
         <p class="seal">${escapeHtml(group.title)}</p>
         <p>${escapeHtml(group.description)}</p>

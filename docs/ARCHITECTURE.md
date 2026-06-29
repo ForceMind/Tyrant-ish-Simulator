@@ -27,6 +27,8 @@
 - `engine.js`：事件抽取、选项结算、诏令、志向、爆雷、结局。
 - `storage.js`：存档、成就、历史、王朝图鉴。
 
+普通月度事件在同一局中严格去重。爆雷事件按隐藏变量阈值和冷却触发，允许同类危机反复发作。若长局把普通事件池耗尽，引擎会生成 `timeline_gap_*` 保护事件；这不是内容目标，而是模拟用来暴露缺口的信号。
+
 ### `src/data/`
 
 - `eras.js`：8 个年号流派。
@@ -82,6 +84,10 @@ shitEmperor.settings.v1
 ### `npm run smoke`
 
 验证数据规模、事件完整性、8 个年号 120 个月长局模拟、三诏令并行、图鉴写入和关键页面渲染。
+
+### `npm run sim:audit`
+
+使用真实状态机和事件引擎跑多种皇帝行为路线，检查普通事件不重复、数值轨迹、自然结局覆盖和 `timeline_gap` 次数。事件时间线、数值规划和补内容清单见 [SIMULATION_AND_CONTENT_PLAN.md](SIMULATION_AND_CONTENT_PLAN.md)。
 
 ### `npm run audit:browser`
 

@@ -75,6 +75,12 @@ npm run smoke
 npm run audit:browser
 ```
 
+数值与结局全真模拟：
+
+```bash
+npm run sim:audit
+```
+
 完整验证：
 
 ```bash
@@ -88,6 +94,7 @@ npm run verify
 - 阶段诏令并行、编年史、结局图鉴写入。
 - 手机和桌面视口无横向溢出、空白页、过小按钮、屏外按钮或乱码。
 - 浏览器真实页面自动推进 84 次选择并触发结局归档。
+- `sim:audit` 使用真实引擎跑 9 条行为路线、45 局模拟，检查普通事件不重复、数值轨迹和自然结局覆盖。
 
 浏览器验收截图输出到 `artifacts/browser-audit/`，该目录不会提交。
 
@@ -101,6 +108,8 @@ npm run verify
 - `scripts/build.mjs`：构建并混淆 Cloudflare Pages 包。
 - `scripts/package-cf.mjs`：打 zip 包。
 - `scripts/smoke-test.mjs`：数据与长局模拟自检。
+- `scripts/simulation-audit.mjs`：数值、事件去重和多结局全真模拟。
 - `scripts/browser-audit.mjs`：headless Chrome UI 与长局验收。
 
 更多架构说明见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)。
+事件时间线、数值导向和后续补内容清单见 [docs/SIMULATION_AND_CONTENT_PLAN.md](docs/SIMULATION_AND_CONTENT_PLAN.md)。

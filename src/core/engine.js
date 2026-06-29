@@ -97,7 +97,12 @@ export function pickEvent(state) {
   if (bomb) return bomb;
 
   const era = getEra(state);
-  const candidates = EVENT_POOL.filter((event) => matchesConditions(event.conditions, state));
+  const candidates = EVENT_POOL.filter((event) => (
+    matchesConditions(event.conditions, state)
+    && !state.seenEventIds.includes(event.id)
+  ));
+  if (!candidates.length) return buildTimelineGapEvent(state);
+
   const weighted = candidates.map((event) => {
     let weight = event.weight || 1;
     if (era) {
@@ -105,11 +110,40 @@ export function pickEvent(state) {
         weight += era.tagWeights[tag] || 0;
       });
     }
-    if (state.seenEventIds.includes(event.id)) weight = Math.max(1, Math.floor(weight * 0.12));
     return { event, weight };
   });
 
   return weightedPick(weighted).event;
+}
+
+function buildTimelineGapEvent(state) {
+  return {
+    id: `timeline_gap_${getTurn(state)}`,
+    category: "system",
+    title: "史官缺稿",
+    speaker: "史官",
+    text: "本月朝廷安静得不正常。史官翻了三遍案卷，发现不是太平，是事件池写完了。",
+    tags: ["时间线", "待补"],
+    weight: 1,
+    conditions: {},
+    options: [
+      {
+        text: "让六部硬凑点事，别让朕显得没内容",
+        response: "六部交来三页废话，史官郑重记下：本月废话很充实。",
+        effects: { court: -2, happiness: 3, corruption: 2 }
+      },
+      {
+        text: "朕亲自制造一点历史",
+        response: "你刚走出宫门，礼部已经开始给事故起雅名。",
+        effects: { prestige: 2, happiness: 4, resentment: 3, intrigue: 2 }
+      },
+      {
+        text: "本月无事，正好睡觉",
+        response: "国家短暂地得到了和平，主要因为皇帝没有参与。",
+        effects: { happiness: 5, court: -2, eunuch: 2 }
+      }
+    ]
+  };
 }
 
 function pickBombEvent(state) {
@@ -147,7 +181,7 @@ export function applyOption(state, optionIndex) {
   updateSoftSignals(state);
   const changes = diffValues(before, snapshotValues(state));
 
-  state.seenEventIds = [event.id, ...state.seenEventIds.filter((id) => id !== event.id)].slice(0, 72);
+  state.seenEventIds = [event.id, ...state.seenEventIds.filter((id) => id !== event.id)];
   state.counters.totalChoices += 1;
   state.lastResponse = {
     eventTitle: event.title,

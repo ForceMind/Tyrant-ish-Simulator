@@ -9,8 +9,9 @@
     "build": "node scripts/build.mjs",
     "package:cf": "npm run build && node scripts/package-cf.mjs",
     "smoke": "node scripts/smoke-test.mjs",
+    "sim:audit": "node scripts/simulation-audit.mjs",
     "audit:browser": "node scripts/browser-audit.mjs",
-    "verify": "npm run smoke && npm run audit:browser"
+    "verify": "npm run smoke && npm run sim:audit && npm run audit:browser"
   },
   "repository": {
     "type": "git",

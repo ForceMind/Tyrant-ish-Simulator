@@ -670,6 +670,11 @@
   background: #b98243;
 }
 
+.stat-desc {
+  display: none;
+  margin: 0;
+}
+
 .stat-row.strong .stat-track span {
   background: #237447;
 }

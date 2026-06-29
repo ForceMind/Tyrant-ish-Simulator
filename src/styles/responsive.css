@@ -700,9 +700,16 @@
 
 @media (min-width: 860px) {
   .game-screen {
-    width: min(100%, 1240px);
-    grid-template-rows: auto auto auto;
+    width: min(100%, 1360px);
+    min-height: 100vh;
+    padding: 18px 28px 24px;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 16px;
     align-content: start;
+  }
+
+  .game-screen .game-header {
+    margin-bottom: 0;
   }
 
   .game-screen > .stat-grid {
@@ -710,35 +717,47 @@
   }
 
   .game-body {
-    grid-template-columns: minmax(0, 1fr) 420px;
-    align-items: start;
+    display: grid;
+    grid-template-columns: minmax(430px, 1.08fr) minmax(300px, 0.8fr) minmax(400px, 1fr);
+    grid-template-rows: minmax(250px, auto) minmax(128px, auto);
+    grid-template-areas:
+      "event policy choices"
+      "event risk choices";
+    gap: 14px;
+    min-height: 0;
+    align-items: stretch;
   }
 
   .play-surface {
+    display: contents;
     min-width: 0;
+    min-height: 0;
   }
 
   .mobile-card-carousel {
-    display: grid;
-    grid-template-columns: minmax(430px, 1fr) minmax(320px, 0.68fr);
-    grid-template-rows: auto auto;
-    align-items: stretch;
+    display: contents;
     max-height: none;
     overflow: visible;
     scroll-snap-type: none;
   }
 
   .game-screen .event-card {
-    min-height: 330px;
+    min-height: 430px;
+    height: 100%;
+    padding: 28px;
   }
 
   .game-screen .long-term-panel,
   .game-screen .risk-panel {
+    height: 100%;
     min-height: 0;
   }
 
   .game-screen .imperial-choice-panel {
-    min-height: 330px;
+    min-height: 430px;
+    height: 100%;
+    padding: 18px;
+    align-self: stretch;
   }
 
   .carousel-slide {
@@ -748,16 +767,69 @@
   }
 
   .carousel-slide.event-slide {
-    grid-row: 1 / span 2;
+    grid-area: event;
+  }
+
+  .carousel-slide:nth-child(2) {
+    grid-area: policy;
+  }
+
+  .carousel-slide:nth-child(3) {
+    grid-area: risk;
+  }
+
+  .game-body > .imperial-choice-panel {
+    grid-area: choices;
+    position: static;
   }
 
   .play-surface > .card-dots {
     display: none;
   }
 
-  .imperial-choice-panel {
-    position: sticky;
-    top: 18px;
+  .game-screen .event-card h2 {
+    font-size: clamp(2.4rem, 3vw, 3.6rem);
+  }
+
+  .game-screen .event-text {
+    max-width: 720px;
+    font-size: 1.16rem;
+  }
+
+  .game-screen .option-list {
+    gap: 14px;
+    align-content: start;
+  }
+
+  .game-screen .option-btn {
+    min-height: 82px;
+    padding: 17px 18px;
+  }
+
+  .game-screen > .stat-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .game-screen .stat-row {
+    display: grid;
+    gap: 8px;
+    min-height: 104px;
+    padding: 10px;
+    border-radius: 8px;
+    background: rgba(255, 250, 229, 0.72);
+  }
+
+  .game-screen .stat-track {
+    height: 10px;
+  }
+
+  .game-screen .stat-desc {
+    display: block;
+    color: #6c5134;
+    font-size: 0.78rem;
+    line-height: 1.35;
   }
 
   .response-panel {

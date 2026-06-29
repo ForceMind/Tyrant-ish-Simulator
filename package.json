@@ -1,0 +1,37 @@
+{
+  "name": "shit-emperor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Standalone H5 roguelike strategy game for Cloudflare Pages.",
+  "type": "module",
+  "scripts": {
+    "dev": "python -m http.server 5174 --bind 127.0.0.1",
+    "build": "node scripts/build.mjs",
+    "package:cf": "npm run build && node scripts/package-cf.mjs",
+    "smoke": "node scripts/smoke-test.mjs",
+    "audit:browser": "node scripts/browser-audit.mjs",
+    "verify": "npm run smoke && npm run audit:browser"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ForceMind/Tyrant-ish-Simulator.git"
+  },
+  "keywords": [
+    "h5",
+    "roguelike",
+    "strategy",
+    "cards",
+    "cloudflare-pages"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ForceMind/Tyrant-ish-Simulator/issues"
+  },
+  "homepage": "https://github.com/ForceMind/Tyrant-ish-Simulator#readme",
+  "devDependencies": {
+    "archiver": "^8.0.0",
+    "esbuild": "^0.28.1",
+    "javascript-obfuscator": "^5.4.3"
+  }
+}

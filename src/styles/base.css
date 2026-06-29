@@ -1,0 +1,124 @@
+:root {
+  color-scheme: light;
+  font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", system-ui, sans-serif;
+  background: #f2dfb9;
+  color: #341d12;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(178, 35, 35, 0.16), transparent 28rem),
+    linear-gradient(180deg, #f5e7c9 0%, #e8c98d 100%);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  touch-action: manipulation;
+}
+
+.app-root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.screen {
+  width: min(100%, 980px);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 18px;
+}
+
+.centered-screen,
+.title-screen {
+  display: grid;
+  place-items: center;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 10px;
+  font-size: clamp(2rem, 6vw, 4rem);
+  line-height: 1.05;
+}
+
+h2 {
+  margin-bottom: 10px;
+  font-size: 1.35rem;
+}
+
+.subtitle,
+.muted {
+  color: #775f42;
+}
+
+.seal {
+  margin-bottom: 8px;
+  color: #8f1d1d;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.toast {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  border: 1px solid #b98243;
+  border-radius: 8px;
+  background: rgba(255, 246, 218, 0.82);
+  color: #6b321f;
+}
+
+.top-nav,
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.date-label {
+  margin-bottom: 4px;
+  color: #8f1d1d;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.meta-line {
+  margin: 0;
+  color: #6b5137;
+  font-size: 0.92rem;
+}
+
+.game-screen,
+.response-screen,
+.ending-screen {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 14px;
+}
+
+.game-body {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}

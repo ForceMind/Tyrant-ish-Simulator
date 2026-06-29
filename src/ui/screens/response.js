@@ -8,16 +8,26 @@ export function renderResponse(state) {
   return `
     <main class="screen response-screen">
       <section class="response-panel">
-        <p class="seal">${escapeHtml(response.eventTitle)}</p>
-        <h1>${t("labels.selected")}</h1>
-        <p class="chosen">${escapeHtml(response.selectedText)}</p>
-        <p class="big-quote">${escapeHtml(response.response)}</p>
-        <div class="change-list">
-          <h2>${t("labels.effect")}</h2>
-          ${renderChanges(response.changes)}
+        <div class="response-pages" aria-label="回应分页">
+          <article class="response-page">
+            <p class="seal">${escapeHtml(response.eventTitle)}</p>
+            <h1>${t("labels.selected")}</h1>
+            <p class="chosen">${escapeHtml(response.selectedText)}</p>
+            <p class="big-quote">${escapeHtml(response.response)}</p>
+          </article>
+          <article class="response-page">
+            <div class="change-list">
+              <h2>${t("labels.effect")}</h2>
+              ${renderChanges(response.changes)}
+            </div>
+            ${state.ambitionRewardText ? `<div class="achievement-pop"><b>志向达成</b><span>${escapeHtml(state.ambitionRewardText)}</span></div>` : ""}
+            ${renderAchievementPop(state.achievementsUnlockedNow)}
+          </article>
         </div>
-        ${state.ambitionRewardText ? `<div class="achievement-pop"><b>志向达成</b><span>${escapeHtml(state.ambitionRewardText)}</span></div>` : ""}
-        ${renderAchievementPop(state.achievementsUnlockedNow)}
+        <div class="card-dots response-dots" aria-hidden="true">
+          <span>回应</span>
+          <span>影响</span>
+        </div>
         ${button("nextMonth", t("buttons.nextMonth"), "", "primary")}
       </section>
       ${renderStatBars(state.stats)}

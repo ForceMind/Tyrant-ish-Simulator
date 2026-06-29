@@ -20,6 +20,15 @@
     grid-template-rows: auto minmax(0, 1fr) auto;
   }
 
+  .response-screen {
+    width: 100%;
+    height: 100dvh;
+    min-height: 0;
+    gap: 7px;
+    overflow: hidden;
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+
   .era-grid,
   .archive-layout,
   .archive-layout-rich,
@@ -39,6 +48,13 @@
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 5px;
     padding: 6px;
+  }
+
+  .response-screen .stat-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-self: end;
+    width: 100%;
+    min-height: 54px;
   }
 
   .stat-row {
@@ -136,6 +152,64 @@
     margin-bottom: 0;
     font-size: 0.92rem;
     line-height: 1.48;
+  }
+
+  .response-panel {
+    min-height: 0;
+    padding: 10px;
+    gap: 7px;
+    grid-template-rows: minmax(0, 1fr) auto auto;
+  }
+
+  .response-pages {
+    height: 100%;
+    gap: 8px;
+  }
+
+  .response-page {
+    padding: 2px;
+  }
+
+  .response-panel h1 {
+    margin-bottom: 6px;
+    font-size: 1.45rem;
+    line-height: 1.12;
+  }
+
+  .response-panel .seal {
+    margin-bottom: 4px;
+    font-size: 0.78rem;
+  }
+
+  .response-panel .chosen {
+    padding: 9px;
+    margin-bottom: 8px;
+    font-size: 0.86rem;
+    line-height: 1.35;
+  }
+
+  .response-panel .change-list {
+    margin: 0;
+    gap: 6px;
+  }
+
+  .response-panel .change-list h2 {
+    font-size: 1rem;
+  }
+
+  .response-panel .change-list span {
+    padding: 5px 7px;
+    font-size: 0.76rem;
+  }
+
+  .response-panel .achievement-pop {
+    margin: 8px 0 0;
+    padding: 9px;
+    font-size: 0.8rem;
+  }
+
+  .response-panel > .btn {
+    min-height: 42px;
   }
 
   .panel-label {
@@ -243,5 +317,30 @@
   .imperial-choice-panel {
     position: sticky;
     top: 18px;
+  }
+
+  .response-panel {
+    grid-template-rows: auto auto;
+    align-content: start;
+  }
+
+  .response-pages {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    overflow: visible;
+  }
+
+  .response-page {
+    flex: initial;
+    overflow: visible;
+  }
+
+  .response-panel > .btn {
+    min-height: 48px;
+    align-self: start;
+  }
+
+  .response-dots {
+    display: none;
   }
 }

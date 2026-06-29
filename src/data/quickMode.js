@@ -135,6 +135,15 @@ export const QUICK_PARAM_GROUPS = [
         yearStep: 2,
         effects: { enemy: 6, resentment: 6, corruption: 6 },
         tags: ["高压"]
+      },
+      {
+        id: "long",
+        title: "十五年长卷",
+        text: "不急着亡，先让错误发酵出层次。",
+        steps: 10,
+        yearStep: 2,
+        effects: { prestige: 3, corruption: 3, resentment: 3 },
+        tags: ["长局"]
       }
     ]
   }
@@ -385,4 +394,3 @@ export const QUICK_ENDINGS = [
     posthumous: "凑合帝"
   }
 ];
-

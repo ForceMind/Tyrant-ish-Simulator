@@ -442,6 +442,7 @@
   }
 
   .quick-play-screen {
+    display: grid;
     height: 100dvh;
     min-height: 0;
     overflow: hidden;
@@ -453,7 +454,7 @@
       "event"
       "choices"
       "log";
-    grid-template-rows: minmax(0, 0.92fr) minmax(184px, 1.08fr) minmax(96px, 0.42fr);
+    grid-template-rows: minmax(126px, 0.76fr) minmax(176px, 1fr) minmax(86px, 0.38fr);
     gap: 8px;
     min-height: 0;
     overflow: hidden;
@@ -462,6 +463,7 @@
   .quick-event-card {
     grid-template-columns: minmax(0, 1fr) 72px;
     min-height: 0;
+    overflow-y: auto;
     padding: 10px;
   }
 
@@ -489,6 +491,14 @@
   .quick-event-card .event-text {
     font-size: 0.82rem;
     line-height: 1.38;
+  }
+
+  .quick-event-card .quick-last-choice {
+    margin-top: 8px;
+    padding: 8px;
+    gap: 5px;
+    font-size: 0.72rem;
+    line-height: 1.25;
   }
 
   .quick-choice-panel {
@@ -536,6 +546,25 @@
   .quick-log li {
     font-size: 0.72rem;
     line-height: 1.3;
+  }
+
+  .quick-play-screen > .stat-grid {
+    align-self: end;
+  }
+
+  .compact-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-ending-screen {
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .quick-ending-screen .ending-scroll {
+    min-height: 0;
+    overflow-y: auto;
   }
 
   .quick-final-strip {

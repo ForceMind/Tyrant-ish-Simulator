@@ -419,7 +419,10 @@ async function auditQuickMode(cdp, name) {
   await click(cdp, '[data-action="startQuick"]');
   await checkPage(cdp, "quick-play");
   await capture(cdp, `${name}-play`);
-  for (let i = 0; i < 8; i += 1) {
+  await clickFirst(cdp, '[data-action="chooseQuickOption"]');
+  await checkPage(cdp, "quick-play-after-choice");
+  await capture(cdp, `${name}-play-after-choice`);
+  for (let i = 1; i < 8; i += 1) {
     const screen = await getScreenName(cdp);
     if (screen === "quickEnding") break;
     assert(screen === "quickPlay", `Quick mode stopped on unexpected screen: ${screen}`);

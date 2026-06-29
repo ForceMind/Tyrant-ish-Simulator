@@ -185,7 +185,8 @@ function paramIcon(id) {
     omen: "瑞",
     short: "速",
     normal: "传",
-    chaos: "压"
+    chaos: "压",
+    long: "卷"
   };
   return icons[id] || "策";
 }

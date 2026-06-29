@@ -5,6 +5,8 @@ import { button, escapeHtml } from "../html.js";
 
 export function renderQuickSetup(state) {
   const params = state.quick?.params || {};
+  const page = Math.max(0, Math.min(Number(state.quickSetupPage) || 0, QUICK_PARAM_GROUPS.length - 1));
+  const group = QUICK_PARAM_GROUPS[page];
   return `
     <main class="screen quick-screen">
       <header class="top-nav">
@@ -12,17 +14,22 @@ export function renderQuickSetup(state) {
         <div>
           <p class="seal">快速版</p>
           <h1>三分钟写完一朝实录</h1>
+          <p class="meta-line">第 ${page + 1}/${QUICK_PARAM_GROUPS.length} 组 · ${escapeHtml(group.title)}</p>
         </div>
       </header>
       <section class="quick-setup-grid">
-        ${QUICK_PARAM_GROUPS.map((group) => renderParamGroup(group, params[group.key] || group.options[0].id)).join("")}
+        ${renderParamGroup(group, params[group.key] || group.options[0].id)}
       </section>
       <section class="quick-start-panel paper-panel">
         <div>
           <h2>快速登基说明</h2>
           <p>先选皇帝底色、施政习惯、开局麻烦和推演速度。系统会自动压缩几年时间，只在关键节点让你拍板。</p>
         </div>
-        ${button("startQuick", "开始速写王朝", "", "primary")}
+        <div class="quick-setup-actions">
+          <button class="btn ghost" type="button" data-action="quickSetupPage" data-value="${page - 1}" ${page === 0 ? "disabled" : ""}>上一组</button>
+          ${button("startQuick", "开始速写王朝", "", "primary")}
+          <button class="btn ghost" type="button" data-action="quickSetupPage" data-value="${page + 1}" ${page === QUICK_PARAM_GROUPS.length - 1 ? "disabled" : ""}>下一组</button>
+        </div>
       </section>
     </main>
   `;
@@ -43,9 +50,14 @@ export function renderQuickPlay(state) {
       </header>
       <section class="quick-play-layout">
         <article class="event-card quick-event-card">
-          <p class="event-kicker">关键节点</p>
-          <h2>${escapeHtml(event.title)}</h2>
-          <p class="event-text">${escapeHtml(event.text)}</p>
+          <div class="quick-event-copy">
+            <p class="event-kicker">关键节点</p>
+            <h2>${escapeHtml(event.title)}</h2>
+            <p class="event-text">${escapeHtml(event.text)}</p>
+          </div>
+          <div class="quick-event-illustration" aria-hidden="true">
+            <span>${escapeHtml(eventIcon(event.id))}</span>
+          </div>
           ${run.lastChoice ? renderLastChoice(run.lastChoice) : ""}
         </article>
         <aside class="imperial-choice-panel quick-choice-panel">
@@ -56,7 +68,8 @@ export function renderQuickPlay(state) {
           <div class="option-list">
             ${event.options.map((option, index) => `
               <button class="option-btn" type="button" data-action="chooseQuickOption" data-value="${index}">
-                ${escapeHtml(option.text)}
+                <span class="option-icon">${escapeHtml(optionIcon(option.text))}</span>
+                <span>${escapeHtml(option.text)}</span>
                 <small>史官旁批：${escapeHtml(option.response)}</small>
               </button>
             `).join("")}
@@ -112,6 +125,7 @@ function renderParamGroup(group, selectedId) {
       <div class="quick-param-options">
         ${group.options.map((option) => `
           <button class="quick-param-card ${option.id === selectedId ? "active" : ""}" type="button" data-action="quickParam" data-value="${escapeHtml(`${group.key}:${option.id}`)}">
+            <span class="param-icon">${escapeHtml(paramIcon(option.id))}</span>
             <b>${escapeHtml(option.title)}</b>
             <span>${escapeHtml(option.text)}</span>
           </button>
@@ -155,3 +169,43 @@ function renderQuickFinalStats(run) {
   return `<div class="final-stat-strip quick-final-strip">${rows.map(([label, value]) => `<span><b>${label}</b>${value}</span>`).join("")}</div>`;
 }
 
+function paramIcon(id) {
+  const icons = {
+    lazy: "床",
+    diligent: "卷",
+    rich: "库",
+    immortal: "丹",
+    benevolent: "仁",
+    iron: "拳",
+    delegate: "印",
+    pleasure: "乐",
+    poor: "碗",
+    border: "关",
+    harem: "宫",
+    omen: "瑞",
+    short: "速",
+    normal: "传",
+    chaos: "压"
+  };
+  return icons[id] || "策";
+}
+
+function eventIcon(id) {
+  if (id.includes("tax")) return "碗";
+  if (id.includes("border")) return "关";
+  if (id.includes("flood")) return "堤";
+  if (id.includes("palace")) return "宫";
+  if (id.includes("eunuch")) return "印";
+  if (id.includes("alchemy")) return "丹";
+  if (id.includes("prince")) return "储";
+  return "奏";
+}
+
+function optionIcon(text) {
+  if (text.includes("税")) return "税";
+  if (text.includes("夜宵") || text.includes("快乐")) return "乐";
+  if (text.includes("官位") || text.includes("太监")) return "印";
+  if (text.includes("军") || text.includes("亲征")) return "兵";
+  if (text.includes("丹")) return "丹";
+  return "旨";
+}

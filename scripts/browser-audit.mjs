@@ -406,8 +406,11 @@ async function auditQuickMode(cdp, name) {
   await checkPage(cdp, "quick-setup");
   await capture(cdp, `${name}-setup`);
   await click(cdp, '[data-action="quickParam"][data-value="temper:rich"]');
+  await click(cdp, '[data-action="quickSetupPage"][data-value="1"]');
   await click(cdp, '[data-action="quickParam"][data-value="policy:pleasure"]');
+  await click(cdp, '[data-action="quickSetupPage"][data-value="2"]');
   await click(cdp, '[data-action="quickParam"][data-value="opening:border"]');
+  await click(cdp, '[data-action="quickSetupPage"][data-value="3"]');
   await click(cdp, '[data-action="quickParam"][data-value="tempo:short"]');
   await click(cdp, '[data-action="startQuick"]');
   await checkPage(cdp, "quick-play");

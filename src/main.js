@@ -3,6 +3,7 @@ import { applyOption, chooseDecree, continueToNextMonth, selectAmbition, startNe
 import { chooseQuickOption, createQuickDraft, setQuickParam, startQuickRun } from "./core/quickEngine.js";
 import { clearAchievements, clearCodex, clearHistory, clearSave, loadGame, saveGame } from "./core/storage.js";
 import { ERA_LIST } from "./data/eras.js";
+import { QUICK_PARAM_GROUPS } from "./data/quickMode.js";
 import { render } from "./ui/render.js";
 
 let state = createInitialState();
@@ -21,6 +22,11 @@ const actions = {
     const [groupKey, optionId] = String(value || "").split(":");
     state.quick = state.quick || createQuickDraft();
     setQuickParam(state, groupKey, optionId);
+    state.screen = "quickSetup";
+    renderApp();
+  },
+  quickSetupPage(value) {
+    state.quickSetupPage = Math.max(0, Math.min(Number(value) || 0, QUICK_PARAM_GROUPS.length - 1));
     state.screen = "quickSetup";
     renderApp();
   },

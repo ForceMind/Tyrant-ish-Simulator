@@ -1,12 +1,20 @@
-import { GAME_CONFIG } from "../../core/config.js";
 import { button } from "../html.js";
 
 export function renderWebsite() {
   return `
     <main class="screen website-screen">
       <nav class="site-nav">
-        <b>Shit皇帝</b>
-        <span>My Bad, Your Empire</span>
+        <div class="site-brand">
+          <b>Shit皇帝</b>
+          <span>My Bad, Your Empire</span>
+        </div>
+        <div class="site-nav-links">
+          <span class="active">首页</span>
+          <span>游戏特色</span>
+          <span>玩法介绍</span>
+          <button type="button" data-action="go" data-value="archives">史官档案</button>
+        </div>
+        ${button("go", "进入游戏大厅", "title", "primary site-nav-cta")}
       </nav>
       <section class="site-hero">
         <div class="site-copy">
@@ -20,11 +28,23 @@ export function renderWebsite() {
           </div>
         </div>
         <div class="site-visual" aria-label="王朝荒唐速写">
-          <div class="palace-roof"></div>
+          <div class="preview-ribbon">快速版实录</div>
+          <div class="palace-roof" aria-hidden="true"></div>
+          <div class="court-stage" aria-hidden="true">
+            <span class="official official-left"></span>
+            <span class="emperor-avatar">乐</span>
+            <span class="official official-right"></span>
+          </div>
+          <div class="preview-caption">
+            <b>国库很满，街上很空</b>
+            <span>户部很幸福，百姓很抽象，国家很像一只上锁的钱箱。</span>
+          </div>
           <div class="throne-card">
-            <span>奏折 +80</span>
-            <span>快乐 -12</span>
-            <span>民怨 暗流涌动</span>
+            <span><b>国库</b>82</span>
+            <span><b>民心</b>24</span>
+            <span><b>军队</b>38</span>
+            <span><b>朝廷</b>50</span>
+            <span><b>快乐</b>70</span>
           </div>
           <div class="mini-edict">朕错了<br>但不改</div>
         </div>
@@ -44,12 +64,11 @@ export function renderWebsite() {
         </article>
       </section>
       <section class="site-strip">
-        <span>${GAME_CONFIG.title}</span>
-        <span>无后端</span>
-        <span>localStorage 存档</span>
-        <span>手机竖屏优先</span>
+        <span>多结局实录</span>
+        <span>关键抉择速通</span>
+        <span>月月都有荒唐事</span>
+        <span>史官负责补刀</span>
       </section>
     </main>
   `;
 }
-
